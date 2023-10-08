@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>じゃんけん</title>
+</head>
+
+<body>
+  <h1>じゃんけん ゲームだ</h1>
+  <p>
+  <div th:if="${name_text}">
+    Hi：[[${name_text}]]
+  </div>
+  <div>
+    <a href="/janken/janken03?select=1">グー</a>
+    <a href="/janken/janken03?select=2">チョキ</a>
+    <a href="/janken/janken03?select=3">パー</a> <br>
+  </div>
+
+  <div th:if="${your_select}">
+    You：[[${your_select}]]
+  </div>
+  <div th:if="${cpu_select}">
+    CPU：[[${cpu_select}]]
+  </div>
+  <div th:if="${result}">
+    Result：[[${result}]]
+  </div>
+  </p>
+</body>
+
+</html>
