@@ -1,5 +1,8 @@
 package oit.is.z2215.kaizi.janken.controller;
 
+import java.security.Principal;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,22 +11,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import oit.is.z2215.kaizi.janken.model.Entry;
+
 @Controller
 @RequestMapping("/janken")
 public class JankenController {
 
-  @GetMapping("/janken01")
-  public String janken01(ModelMap model) {
-    model.addAttribute("name_text", "名前を入力してください");
-    return "janken.html";
-  }
+  @Autowired
+  private Entry room;
 
-  @PostMapping("/janken02")
-  public String janken02(@RequestParam String name_text, ModelMap model) {
-    model.addAttribute("name_text", name_text);
-    return "janken.html";
-  }
-
+  /*
+   * @GetMapping("/janken01")
+   * public String janken01(ModelMap model) {
+   * model.addAttribute("name_text", "名前を入力してください");
+   * return "janken.html";
+   * }
+   * 
+   * @PostMapping("/janken02")
+   * public String janken02(@RequestParam String name_text, ModelMap model) {
+   * model.addAttribute("name_text", name_text);
+   * return "janken.html";
+   * }
+   */
   @GetMapping("/janken03")
   public String janken03(@RequestParam Integer select, ModelMap model) {
     if (select == 1) {
@@ -41,4 +50,14 @@ public class JankenController {
     }
     return "janken.html";
   }
+
+  @GetMapping("/janken01")
+  public String sample38(Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    this.room.addUser(loginUser);
+    model.addAttribute("room", this.room);
+
+    return "janken.html";
+  }
+
 }
