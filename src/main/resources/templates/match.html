@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>じゃんけん</title>
+</head>
+
+<body>
+  <p>
+  <div sec:authentication="name">
+  </div>
+  <div th:if="${vs}">
+    vs
+    [[${vs.username}]]
+  </div>
+
+  <div>
+    <a href="/janken/fight?select=1">グー</a>
+    <a href="/janken/fight?select=2">チョキ</a>
+    <a href="/janken/fight?select=3">パー</a> <br>
+  </div>
+
+
+  <div th:if="${your_select}">
+    You：[[${your_select}]]
+  </div>
+  <div th:if="${cpu_select}">
+    CPU：[[${cpu_select}]]
+  </div>
+  <div th:if="${result}">
+    Result：[[${result}]]
+  </div>
+
+
+
+
+  <a href="/janken/step1">もどる</a>
+  </p>
+</body>
+
+</html>

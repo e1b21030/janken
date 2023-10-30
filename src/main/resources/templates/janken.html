@@ -7,21 +7,40 @@
 </head>
 
 <body>
-  <h1>じゃんけん ゲームだ</h1>
+  <h1>じゃんけん ゲーム!</h1>
   <h2>HI!<div sec:authentication="name"></div>
   </h2>
   <p>
-  <div th:if="${room}">
+
+
+
+  <div th:if="${user1}">
+    [[${user1.username}]]さんがログイン中
     エントリー
-    <ul>
-      <li th:each="user : ${room.users}">[[${user}]]</li>
-    </ul>
   </div>
-  <div>
-    <a href="/janken/janken03?select=1">グー</a>
-    <a href="/janken/janken03?select=2">チョキ</a>
-    <a href="/janken/janken03?select=3">パー</a> <br>
+
+  <div th:each="user,stat:${users}">
+
+    <tr>
+      <td>ID:[[${user.id}]]</td>
+      <td>ユーザ名:[[${user.username}]]</td>
+      <a th:href="@{/janken/match?(id=${user.id})}"> [[${user.name}]]</a>
+    </tr>
   </div>
+
+
+  <div>試合結果</div>
+  <p th:each="match,stat:${matches}">
+    <tr>
+      <td>ID:[[${match.id}]]</td>
+      <td>ユーザ名:[[${match.user1}]]</td>
+      <td>ユーザ名:[[${match.user2}]]</td>
+      <td>[[${match.user1Hand}]]</td>
+      <td>[[${match.user2Hand}]]</td>
+    </tr>
+
+  </p>
+
 
   <div th:if="${your_select}">
     You：[[${your_select}]]
@@ -31,6 +50,13 @@
   </div>
   <div th:if="${result}">
     Result：[[${result}]]
+  </div>
+
+  <div th:if="${match}">
+    <td>[[${match.user1}]]</td>
+    <td>[[${match.user2}]]</td>
+    <td>[[${match.user1Hand}]]</td>
+    <td>[[${match.user2Hand}]]</td>
   </div>
 
   <div><a href="/logout">ログアウト</a></div>
